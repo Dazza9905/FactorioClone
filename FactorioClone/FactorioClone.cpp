@@ -2,14 +2,11 @@
 
 int main()
 {
-    InitWindow(800, 450, "Factorio Clone");
+    InitWindow(512, 512, "FactorioClone");
+    InitWindow(512, 512, "FactorioClone2");
+
     while (!WindowShouldClose())
     {
-
-        
-        
-
         
     }
-    CloseWindow();
 }

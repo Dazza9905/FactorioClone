@@ -160,8 +160,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BuildingManager.cpp" />
     <ClCompile Include="Buildings\Belt.cpp" />
     <ClCompile Include="Buildings\Destroyer.cpp" />
+    <ClCompile Include="Buildings\IBuilding.cpp" />
     <ClCompile Include="Buildings\Modifier.cpp" />
     <ClCompile Include="Buildings\Spawner.cpp" />
     <ClCompile Include="FactorioClone.cpp" />
@@ -169,8 +171,10 @@
     <ClCompile Include="GridCell.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BuildingManager.h" />
     <ClInclude Include="Buildings\Belt.h" />
     <ClInclude Include="Buildings\Destroyer.h" />
+    <ClInclude Include="Buildings\IBuilding.h" />
     <ClInclude Include="Buildings\Modifier.h" />
     <ClInclude Include="Buildings\Spawner.h" />
     <ClInclude Include="Grid.h" />
