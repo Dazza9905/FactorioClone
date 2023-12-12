@@ -6,15 +6,17 @@ class Grid
 {
     
 public:
-    Grid(int sizeX, int sizeY, int tileSize);
-    
-    void Update(float deltaTime);
+    Grid(Vector2 position, Vector2 gridSize, int tileSize);
+
+    void gridResize(Vector2 gridSize);  
+    // void Update(float deltaTime);
     void Draw();
 
-private:
-    int sizeX;
-    int sizeY;
-    int tileSize;
+    Vector2 getGridSizeV() { return gridSize; }
 
+private:
+    Vector2 position;
+    Vector2 gridSize;
+    int tileSize;
     std::vector<std::vector<GridCell>> gridCells;
 };
