@@ -1,8 +1,14 @@
 ﻿#include "Grid.h"
-#include "GridCell.h"
+#include <cmath>
+#include <chrono>
 
-Grid::Grid(Vector2 position, Vector2 gridSize, int tileSize)
-    : position(position), gridSize(gridSize), tileSize(tileSize) // use constructor initialization list
+#include "GridCell.h"
+#include <raylib.h>
+
+Grid* Grid::instance = nullptr;
+
+Grid::Grid(Vector2 gridPosition, Vector2 gridSize, int tileSize)
+    : gridPosition(gridPosition), gridSize(gridSize), tileSize(tileSize) // use constructor initialization list
 {
     
     // Construct GridCell[sizeY] and assigns it to each gridCells[i]
@@ -13,7 +19,7 @@ Grid::Grid(Vector2 position, Vector2 gridSize, int tileSize)
 
         // Construct GridCell[sizeX] and assigns it to each tempRow[j]
         for (int j = 0; j < gridSize.y; j++) {
-            tempRow.push_back(GridCell(Vector2 { position.x + i * tileSize, position.y + j * tileSize }, tileSize));
+            tempRow.push_back(GridCell(Vector2 { gridPosition.x + i * tileSize, gridPosition.y + j * tileSize }, tileSize));
         }
 
         // Add the row to the gridCells
@@ -21,7 +27,29 @@ Grid::Grid(Vector2 position, Vector2 gridSize, int tileSize)
     }
 }
 
-void Grid::gridResize(Vector2 gridSize)
+void Grid::PlaceBuilding(Vector2 buildPosition)
+{
+    gridCells[buildPosition.x][buildPosition.y].PlaceBuilding();
+}
+
+
+
+
+Vector2 Grid::GetGridCellAtMousePosition(Vector2 mousePos)
+{
+    // Get the gridcell at the mouse gridPosition
+    Vector2 gridCellPos = Vector2 { std::floor((mousePos.x - gridPosition.x) / tileSize), std::floor((mousePos.y - gridPosition.y) / tileSize) };
+    // printf("gridCellPos: %f, %f\n", gridCellPos.x, gridCellPos.y);
+
+    // Check if the grid cell is out of bounds
+    // if (gridCellPos.x < 0 || gridCellPos.x >= gridSize.x || gridCellPos.y < 0 || gridCellPos.y >= gridSize.y) {
+    //     return Vector2 { -1, -1 };
+    // }
+
+    return gridCellPos;
+}
+
+void Grid::GridResize(Vector2 gridSize)
 {
     // Clear the gridCells
     gridCells.clear();
@@ -34,7 +62,7 @@ void Grid::gridResize(Vector2 gridSize)
 
         // Construct GridCell[sizeX] and assigns it to each tempRow[j]
         for (int j = 0; j < gridSize.y; j++) {
-            tempRow.push_back(GridCell(Vector2 { position.x + i * tileSize, position.y + j * tileSize }, tileSize));
+            tempRow.push_back(GridCell(Vector2 { gridPosition.x + i * tileSize, gridPosition.y + j * tileSize }, tileSize));
         }
 
         // Add the row to the gridCells
@@ -45,7 +73,6 @@ void Grid::gridResize(Vector2 gridSize)
     
     
 }
-
 
 void Grid::Draw()
 {

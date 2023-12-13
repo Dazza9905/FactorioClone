@@ -163,22 +163,25 @@
     <ClCompile Include="BuildingManager.cpp" />
     <ClCompile Include="Buildings\Belt.cpp" />
     <ClCompile Include="Buildings\Destroyer.cpp" />
-    <ClCompile Include="Buildings\IBuilding.cpp" />
+    <ClCompile Include="Buildings\BuildingBASE.cpp" />
     <ClCompile Include="Buildings\Modifier.cpp" />
     <ClCompile Include="Buildings\Spawner.cpp" />
     <ClCompile Include="FactorioClone.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridCell.cpp" />
+    <ClCompile Include="InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BuildingManager.h" />
     <ClInclude Include="Buildings\Belt.h" />
     <ClInclude Include="Buildings\Destroyer.h" />
-    <ClInclude Include="Buildings\IBuilding.h" />
+    <ClInclude Include="Buildings\BuildingBASE.h" />
     <ClInclude Include="Buildings\Modifier.h" />
     <ClInclude Include="Buildings\Spawner.h" />
+    <ClInclude Include="Direction.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridCell.h" />
+    <ClInclude Include="InputManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

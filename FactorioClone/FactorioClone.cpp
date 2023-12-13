@@ -1,43 +1,37 @@
 #include "raylib.h"
 #include "Grid.h"
+#include "BuildingManager.h"
+#include "InputManager.h"
 
 int main()
 {
+
+    
+    struct config
+    {
+        int tileSize = 64;
+        Vector2 gridSize = { 32, 18 };
+        Vector2 position = { 0, 0 };
+        int windowWidth = tileSize * gridSize.x;
+        int windowHeight = tileSize * gridSize.y;
+    };
+    config config;
+
+    
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(512, 512, "FactorioClone");
+    InitWindow(config.windowWidth + config.tileSize*2, config.windowHeight, "FactorioClone");
 
-    Grid grid(Vector2 { 0, 0 }, Vector2 { 2, 2 }, 32);
-
-    Rectangle rec = { 0, 0, 128, 128 };
-
+    Grid::GetInstance(config.position, config.gridSize, config.tileSize);
     
     while (!WindowShouldClose())
     {
+        InputManager::GetInstance()->CheckInput(*Grid::GetInstance());
 
         DrawRectangle(0, 0, 128, 128, RED);
         
-        // is right arrow paressed?
-        if (IsKeyPressedRepeat(KEY_RIGHT)) {
-            grid.getGridSizeV().x;
-            grid.gridResize(Vector2 { grid.getGridSizeV().x + 1, grid.getGridSizeV().y });
-        }
-        // is left arrow paressed?
-        if (IsKeyPressedRepeat(KEY_LEFT)) {
-            grid.getGridSizeV().x;
-            grid.gridResize(Vector2 { grid.getGridSizeV().x - 1, grid.getGridSizeV().y });
-        }
-        // is up arrow paressed?
-        if (IsKeyPressedRepeat(KEY_UP)) {
-            grid.getGridSizeV().y;
-            grid.gridResize(Vector2 { grid.getGridSizeV().x, grid.getGridSizeV().y - 1 });
-        }
-        // is down arrow paressed?
-        if (IsKeyPressedRepeat(KEY_DOWN)) {
-            grid.getGridSizeV().y;
-            grid.gridResize(Vector2 { grid.getGridSizeV().x, grid.getGridSizeV().y + 1 });
-        }
+        
 
-        grid.Draw();
+        Grid::GetInstance()->Draw();
 
         
         BeginDrawing();
